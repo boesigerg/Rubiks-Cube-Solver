@@ -7,6 +7,20 @@ class Cube:
         self.front = front
         self.back = back
 
-    def turn_side(self, side):
+    def __str__(self):
+        return ("FRONT\n"
+                + str(self.front)
+                + "\nTOP\n"
+                + str(self.top)
+                + "\nBACK\n"
+                + str(self.back)
+                + "\nBOTTOM\n"
+                + str(self.bottom)
+                + "\nLEFT\n"
+                + str(self.left)
+                + "\nRIGHT\n"
+                + str(self.right))
+
+    def turn_side(self, side, clockwise):
         pass
 

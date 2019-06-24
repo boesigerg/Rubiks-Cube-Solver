@@ -1,10 +1,13 @@
-from enum import Enum
+from side import *
+from cube import *
 
 
-class Color(Enum):
-    RED = 0
-    ORANGE = 1
-    YELLOW = 2
-    GREEN = 3
-    BLUE = 4
-    WHITE = 5
+topSide = Side(Color.BLUE)
+bottomSide = Side(Color.GREEN)
+frontSide = Side(Color.RED)
+backSide = Side(Color.ORANGE)
+leftSide = Side(Color.WHITE)
+rightSide = Side(Color.YELLOW)
+
+rubik = Cube(topSide, bottomSide, leftSide, rightSide, frontSide, backSide)
+print(rubik)
