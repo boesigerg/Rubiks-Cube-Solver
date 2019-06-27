@@ -1,3 +1,6 @@
+import numpy as np
+
+
 class Cube:
     def __init__(self, top, bottom, left, right, front, back):
         self.top = top
@@ -32,10 +35,20 @@ class Cube:
             self.top.turn(clockwise)
             self.back.grid[2], self.right.grid[0], self.front.grid[0], self.left.grid[0] = turn_helper(
                 self.back.grid[2], self.right.grid[0], self.front.grid[0], self.left.grid[0], clockwise)
+            self.back.grid[2] = np.flip(self.back.grid[2])
+            if clockwise:
+                self.right.grid[0] = np.flip(self.right.grid[0])
+            else:
+                self.left.grid[0] = np.flip(self.left.grid[0])
         elif side == "BOTTOM":
             self.bottom.turn(clockwise)
             self.front.grid[2], self.right.grid[2], self.back.grid[0], self.left.grid[2] = turn_helper(
                 self.front.grid[2], self.right.grid[2], self.back.grid[0], self.left.grid[2], clockwise)
+            self.back.grid[0] = np.flip(self.back.grid[0])
+            if clockwise:
+                self.left.grid[2] = np.flip(self.left.grid[2])
+            else:
+                self.right.grid[2] = np.flip(self.right.grid[2])
         elif side == "LEFT":
             self.left.turn(clockwise)
             self.top.grid[:, 0], self.front.grid[:, 0], self.bottom.grid[:, 0], self.back.grid[:, 0] = turn_helper(
@@ -48,10 +61,20 @@ class Cube:
             self.front.turn(clockwise)
             self.top.grid[2], self.right.grid[:, 0], self.bottom.grid[0], self.left.grid[:, 2] = turn_helper(
                 self.top.grid[2], self.right.grid[:, 0], self.bottom.grid[0], self.left.grid[:, 2], clockwise)
+            if clockwise:
+                self.bottom.grid[0] = np.flip(self.bottom.grid[0])
+            else:
+                self.left.grid[:, 2] = np.flip(self.left.grid[:, 2])
         elif side == "BACK":
             self.back.turn(clockwise)
             self.bottom.grid[2], self.right.grid[:, 2], self.top.grid[0], self.left.grid[:, 0] = turn_helper(
                 self.bottom.grid[2], self.right.grid[:, 2], self.top.grid[0], self.left.grid[:, 0], clockwise)
+            if clockwise:
+                self.left.grid[:, 0] = np.flip(self.left.grid[:, 0])
+                self.right.grid[:, 2] = np.flip(self.right.grid[:, 2])
+            else:
+                self.top.grid[0] = np.flip(self.top.grid[0])
+                self.bottom.grid[2] = np.flip(self.bottom.grid[2])
 
 
 # turn_helper, for lack of a better name, contains the logic for swapping

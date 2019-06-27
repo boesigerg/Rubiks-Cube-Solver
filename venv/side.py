@@ -21,9 +21,9 @@ class Side:
         #some magic happens here, thanks to stackoverflow
         #Gist:Alter list as though it were a 3x3 matrix being turned 90 degrees
         if clockwise:
-            self.grid = np.asarray(list(zip(*self.grid[::-1])))
+            self.grid = np.rot90(self.grid, -1)
         else:
-            self.grid = np.asarray(list(zip(*reversed(self.grid))))
+            self.grid = np.rot90(self.grid, 1)
 
     def get_row(self, isCol, element):
         if isCol:
