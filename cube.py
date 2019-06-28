@@ -30,7 +30,7 @@ class Cube:
         # For a given side:
         # Turn itself using side.turn()
         # Swap edges of surrounding sides
-        # TODO: Find rows which need orientation reversed
+        # Ensure translated rows are oriented properly
         if side == "TOP":
             self.top.turn(clockwise)
             self.back.grid[2], self.right.grid[0], self.front.grid[0], self.left.grid[0] = turn_helper(
@@ -62,9 +62,11 @@ class Cube:
             self.top.grid[2], self.right.grid[:, 0], self.bottom.grid[0], self.left.grid[:, 2] = turn_helper(
                 self.top.grid[2], self.right.grid[:, 0], self.bottom.grid[0], self.left.grid[:, 2], clockwise)
             if clockwise:
+                self.top.grid[2] = np.flip(self.top.grid[2])
                 self.bottom.grid[0] = np.flip(self.bottom.grid[0])
             else:
                 self.left.grid[:, 2] = np.flip(self.left.grid[:, 2])
+                self.right.grid[:, 0] = np.flip(self.right.grid[:, 0])
         elif side == "BACK":
             self.back.turn(clockwise)
             self.bottom.grid[2], self.right.grid[:, 2], self.top.grid[0], self.left.grid[:, 0] = turn_helper(
