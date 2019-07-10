@@ -10,21 +10,22 @@ class Cube:
         self.front = front
         self.back = back
 
-    def __str__(self):
-        cube_string = ("FRONT\n"
-                        + str(self.front)
-                        + "\nTOP\n"
-                        + str(self.top)
-                        + "\nBACK\n"
-                        + str(self.back)
-                        + "\nBOTTOM\n"
-                        + str(self.bottom)
-                        + "\nLEFT\n"
-                        + str(self.left)
-                        + "\nRIGHT\n"
-                        + str(self.right))
-        return cube_string.replace('0', 'R').replace('1', 'O').replace('2', 'Y')\
-            .replace('3', 'G').replace('4', 'B').replace('5', 'W')
+    def flatten(self):
+        flattened = np.empty((12, 9), np.int8)
+        flattened.fill(6)
+        for row in range(3):
+            flattened[0+row, 3:6] = self.top.grid[row]
+        for row in range(3):
+            flattened[3+row, 0:3] = self.left.grid[row]
+        for row in range(3):
+            flattened[3+row, 3:6] = self.front.grid[row]
+        for row in range(3):
+            flattened[3+row, 6:9] = self.right.grid[row]
+        for row in range(3):
+            flattened[6+row, 3:6] = self.bottom.grid[row]
+        for row in range(3):
+            flattened[9+row, 3:6] = self.back.grid[row]
+        return flattened
 
     def turn_side(self, side, clockwise):
         # For a given side:
